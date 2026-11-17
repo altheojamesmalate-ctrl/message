@@ -5,7 +5,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400;1,9..144,600&family=Manrope:wght@400;500;600&display=swap">
 <style>
-/* Layout: one liquid-glass card centred over a still night sky with a moon and drifting words, told as five short scenes, ending in an on-site reply sheet. Single committed look (dusk), not theme-switched. */
 :root {
   --night: #0b1020;
   --deep: #1d2552;
@@ -41,13 +40,9 @@
   transition: --night 1.8s ease, --deep 1.8s ease, --mist 1.8s ease, --violet 1.8s ease, --lamp 1.8s ease,
     --cx 2s ease, --cy 2s ease, --cs 2s ease, --oc1 1.8s ease, --oc2 1.8s ease, --oc3 1.8s ease, --oglow 1.8s ease, --oglow2 1.8s ease;
 }
-/* ache */
 :root[data-t="ache"] { --night: #06101a; --deep: #13262f; --mist: #3d6577; --violet: #6f87a3; --lamp: #c4d8e8; --cx: 22%; --cy: 20%; --cs: 11vmin; --oc1: #cfd9e2; --oc2: #98a9b8; --oc3: #6c7f91; --oglow: rgba(150, 170, 190, .22); --oglow2: rgba(61, 101, 119, .18); }
-/* dawn */
 :root[data-t="dawn"] { --night: #2c2a55; --deep: #8a5b8e; --mist: #f2a07f; --violet: #f6c39b; --lamp: #ffe9bf; --cx: 50%; --cy: 90%; --cs: 36vmin; --oc1: #fffbe6; --oc2: #ffe2a8; --oc3: #ffb985; --oglow: rgba(255, 210, 150, .5); --oglow2: rgba(242, 160, 127, .35); }
-/* sun */
 :root[data-t="sun"] { --night: #12050c; --deep: #6e1a1f; --mist: #ff6a2b; --violet: #ffb13b; --lamp: #ffe7a8; --cx: 50%; --cy: 17%; --cs: 22vmin; --oc1: #ffffff; --oc2: #fff1b8; --oc3: #ffc861; --oglow: rgba(255, 220, 130, .7); --oglow2: rgba(255, 106, 43, .45); }
-/* tender */
 :root[data-t="tender"] { --night: #2b0d2e; --deep: #7d1d4c; --mist: #ff5f70; --violet: #ff9a4e; --lamp: #ffd69a; --cx: 50%; --cy: 100%; --cs: 56vmin; --oc1: #fff3d6; --oc2: #ffd69a; --oc3: #ff9a4e; --oglow: rgba(255, 214, 154, .5); --oglow2: rgba(255, 95, 112, .35); }
 
 * { box-sizing: border-box; }
@@ -63,7 +58,6 @@ body {
   overflow-x: hidden;
 }
 
-/* ---------- Sunset backdrop ---------- */
 .sky {
   position: fixed; inset: 0; z-index: 0; overflow: hidden;
   background:
@@ -96,7 +90,6 @@ body {
   transition: transform .25s ease-out;
 }
 
-/* ---------- Stage ---------- */
 .stage {
   position: relative; z-index: 2; min-height: 100%;
   display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px;
@@ -216,7 +209,6 @@ body {
 .bar i { display: block; height: 100%; width: var(--p, 0%); border-radius: inherit; background: #fff; box-shadow: 0 0 10px rgba(255, 255, 255, .8); transition: width .6s cubic-bezier(.3, 1, .4, 1); }
 .cnt { font-size: 11px; letter-spacing: .12em; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
 
-/* ---------- Reply sheet ---------- */
 .overlay {
   position: fixed; inset: 0; z-index: 20; display: none; align-items: center; justify-content: center;
   padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
@@ -342,7 +334,6 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
 (function () {
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- Story ---------- */
   var theme = "wonder", onTheme = null;
   function applyTheme(n) {
     if (!n) return;
@@ -531,7 +522,6 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
     if (Math.abs(dx) > 60) go(dx < 0 ? 1 : -1);
   }, { passive: true });
 
-  /* ---------- Pointer: glow, tilt, specular ---------- */
   var card = document.getElementById("card"), glow = document.getElementById("glow");
   document.addEventListener("pointermove", function (e) {
     glow.style.setProperty("--gx", e.clientX + "px"); glow.style.setProperty("--gy", e.clientY + "px");
@@ -543,7 +533,6 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
   });
   card.addEventListener("pointerleave", function () { card.style.setProperty("--rx", "0deg"); card.style.setProperty("--ry", "0deg"); });
 
-  /* ---------- Themed particles ---------- */
   var cv = document.getElementById("fx"), cx = cv.getContext("2d"), W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2), P = [], mode = "words";
   var MODES = { wonder: "words", ache: "rain", dawn: "motes", sun: "embers", tender: "hearts" };
   var WORDS = ["quiet", "echo", "curious", "still", "light", "ink", "words", "moon", "stay", "hum"];
@@ -601,7 +590,6 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
   };
   requestAnimationFrame(tick);
 
-  /* ---------- Heart burst ---------- */
   function burst(x, y) {
     if (reduce) return;
     for (var i = 0; i < 26; i++) {
@@ -614,7 +602,6 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
     }
   }
 
-  /* ---------- Reply sheet ---------- */
   var overlay = document.getElementById("replyOverlay"), msg = document.getElementById("msg"), nm = document.getElementById("nm"),
       send = document.getElementById("send"), note = document.getElementById("note"), chips = document.getElementById("chips"),
       form = document.getElementById("replyForm"), done = document.getElementById("replyDone");
@@ -669,7 +656,6 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
     });
   });
 
-  /* ---------- Owner view ---------- */
   var ownerBtn = document.getElementById("ownerBtn"), ownerOverlay = document.getElementById("ownerOverlay"),
       repList = document.getElementById("repList"), ownerSub = document.getElementById("ownerSub"), subscribed = false;
   function listen() {
@@ -692,7 +678,6 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
   document.getElementById("ownerClose").addEventListener("click", closeAll);
   ownerOverlay.addEventListener("pointerdown", function (e) { if (e.target === ownerOverlay) closeAll(); });
 
-  /* ---------- Capabilities (light up when available) ---------- */
   if (window.claude && claude.use) {
     Promise.all([claude.use("db"), claude.use("user")]).then(function (r) {
       db = r[0]; user = r[1];
