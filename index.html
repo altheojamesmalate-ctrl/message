@@ -195,7 +195,6 @@ body {
 
 .hint { font-size: 13px; color: var(--ink-soft); text-align: center; letter-spacing: .02em; }
 
-/* ---------- Poems ---------- */
 .verse { display: flex; flex-direction: column; gap: 10px; margin: 0 auto; max-width: 46ch; }
 .verse .ln { margin: 0; font-family: var(--font-display); font-style: italic; font-size: clamp(18px, 4.6vw, 21px); line-height: 1.5; color: var(--ink); text-wrap: pretty; animation: rise .9s both; animation-delay: calc(var(--i) * 170ms + 150ms); }
 .verse.verse { text-align: center; gap: 8px; }
@@ -315,7 +314,7 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
     </div>
     <div class="done" id="replyDone" hidden>
       <h2>Sent.</h2>
-      <p class="sub">Thank you for reading, and for answering. That took something.</p>
+      <p class="sub">Thank you for reading, and for answering. It means a lot.</p>
       <div class="row" style="justify-content:center"><button class="btn" id="doneClose" type="button">Close</button></div>
     </div>
   </div>
@@ -341,7 +340,7 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
     theme = n; document.documentElement.setAttribute("data-t", n); if (onTheme) onTheme(n);
   }
   var scenes = [
-    { theme: "wonder", kicker: "For you", title: "I wrote these for one person.", body: "They aren’t polished and they aren’t a pitch. They’re what I couldn’t say out loud. Read them slowly." },
+    { theme: "wonder", kicker: "For you", title: "I wrote these for one person.", body: "It might sound cringe, but it’s honest. These are the things I couldn’t say out loud." },
 
     { theme: "wonder", mode: "verse", kicker: "I · Where it began", lines: [
       "I’ve always been drawn to understanding things — the way people connect, how feelings form, how curiosity quietly turns into something more.",
