@@ -7,7 +7,7 @@
 <style>
 :root {
   --night: #0b1020;
-  --deep: #1d2552; 
+  --deep: #1d2552;
   --mist: #6f7fd6;
   --violet: #a98be0;
   --lamp: #f6d9a0;
@@ -43,6 +43,7 @@
 :root[data-t="ache"] { --night: #06101a; --deep: #13262f; --mist: #3d6577; --violet: #6f87a3; --lamp: #c4d8e8; --cx: 22%; --cy: 20%; --cs: 11vmin; --oc1: #cfd9e2; --oc2: #98a9b8; --oc3: #6c7f91; --oglow: rgba(150, 170, 190, .22); --oglow2: rgba(61, 101, 119, .18); }
 :root[data-t="dawn"] { --night: #2c2a55; --deep: #8a5b8e; --mist: #f2a07f; --violet: #f6c39b; --lamp: #ffe9bf; --cx: 50%; --cy: 90%; --cs: 36vmin; --oc1: #fffbe6; --oc2: #ffe2a8; --oc3: #ffb985; --oglow: rgba(255, 210, 150, .5); --oglow2: rgba(242, 160, 127, .35); }
 :root[data-t="sun"] { --night: #12050c; --deep: #6e1a1f; --mist: #ff6a2b; --violet: #ffb13b; --lamp: #ffe7a8; --cx: 50%; --cy: 17%; --cs: 22vmin; --oc1: #ffffff; --oc2: #fff1b8; --oc3: #ffc861; --oglow: rgba(255, 220, 130, .7); --oglow2: rgba(255, 106, 43, .45); }
+:root[data-t="year"] { --night: #07161a; --deep: #14403f; --mist: #3fae9a; --violet: #8fd6b5; --lamp: #ffe8a8; --cx: 72%; --cy: 24%; --cs: 13vmin; --oc1: #f4fff0; --oc2: #bff0d3; --oc3: #6cc9a5; --oglow: rgba(150, 240, 200, .35); --oglow2: rgba(63, 174, 154, .25); }
 :root[data-t="tender"] { --night: #2b0d2e; --deep: #7d1d4c; --mist: #ff5f70; --violet: #ff9a4e; --lamp: #ffd69a; --cx: 50%; --cy: 100%; --cs: 56vmin; --oc1: #fff3d6; --oc2: #ffd69a; --oc3: #ff9a4e; --oglow: rgba(255, 214, 154, .5); --oglow2: rgba(255, 95, 112, .35); }
 
 * { box-sizing: border-box; }
@@ -138,6 +139,9 @@ body {
 }
 @keyframes bob { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-9px) rotate(6deg); } }
 
+.bub { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; pointer-events: none; }
+.bub i { position: absolute; bottom: -12px; left: var(--l); width: var(--z); height: var(--z); border-radius: 50%; background: rgba(255, 255, 255, .7); box-shadow: inset 0 0 4px rgba(255, 255, 255, .9); opacity: 0; animation: fizz var(--d) var(--w) linear infinite; }
+@keyframes fizz { 0% { transform: translateY(0) scale(.6); opacity: 0; } 15% { opacity: .9; } 100% { transform: translateY(-96px) scale(1); opacity: 0; } }
 .scene { min-height: 280px; display: flex; flex-direction: column; text-align: center; }
 .scene.leave { animation: sceneOut .3s ease-in forwards; }
 @keyframes sceneOut { to { opacity: 0; filter: blur(12px); transform: translateY(-10px) scale(.98); } }
@@ -285,7 +289,7 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
 
 <main class="stage">
   <section class="glass card" id="card" aria-live="polite">
-    <div class="orb-wrap"><div class="orb" aria-hidden="true"></div></div>
+    <div class="orb-wrap"><div class="orb" aria-hidden="true"><div class="bub"><i style="--l:22%;--z:6px;--d:3.2s;--w:0.0s"></i><i style="--l:38%;--z:4px;--d:2.6s;--w:0.8s"></i><i style="--l:52%;--z:8px;--d:3.8s;--w:1.4s"></i><i style="--l:66%;--z:5px;--d:2.9s;--w:0.3s"></i><i style="--l:78%;--z:4px;--d:3.4s;--w:1.9s"></i><i style="--l:46%;--z:5px;--d:2.4s;--w:2.4s"></i></div></div></div>
     <div class="scene" id="scene"></div>
   </section>
   <p class="hint" id="hint">Tap Continue or use the arrow keys. <button class="btn ghost" id="skip" type="button">Skip to the reply</button></p>
@@ -295,13 +299,7 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
   <div class="glass sheet" id="replySheet">
     <div id="replyForm">
       <h2 id="replyTitle">Your reply</h2>
-      <p class="sub">Pick what fits, or write it your own way. It goes straight to me, and only me.</p>
-      <div class="chips" id="chips" role="group" aria-label="Quick replies">
-        <button class="chip" type="button" aria-pressed="false" data-v="Thank you for telling me">Thank you for telling me</button>
-        <button class="chip" type="button" aria-pressed="false" data-v="I feel the same">I feel the same</button>
-        <button class="chip" type="button" aria-pressed="false" data-v="I need a little time">I need a little time</button>
-        <button class="chip" type="button" aria-pressed="false" data-v="I'm sorry, I can't">I'm sorry, I can't</button>
-      </div>
+      <p class="sub">Write it your own way. It goes straight to me, and only me.</p>
       <label class="f" for="msg">Your message</label>
       <textarea class="field" id="msg" rows="4" maxlength="800" placeholder="Say whatever is true for you."></textarea>
       <label class="f" for="nm">What should I call you? (optional)</label>
@@ -314,7 +312,7 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
     </div>
     <div class="done" id="replyDone" hidden>
       <h2>Sent.</h2>
-      <p class="sub">Thank you for reading, and for answering. It means a lot.</p>
+      <p class="sub">Thank you for reading, and for answering. That took something.</p>
       <div class="row" style="justify-content:center"><button class="btn" id="doneClose" type="button">Close</button></div>
     </div>
   </div>
@@ -452,6 +450,26 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
       "But for now, I’ll keep my distance from your light. Even if it stings a little, it’s still beautiful to see."
     ] },
 
+    { theme: "year", mode: "verse", kicker: "V · A year later", lines: [
+      "It’s already been a year.",
+      "And to be honest, I still don’t know if I’ll ever send this to you.",
+      "I’ve mapped out so many scenarios in my head, and every time, it ends differently.",
+      "That’s what scares me."
+    ] },
+    { theme: "year", mode: "verse", kicker: "V · A year later", lines: [
+      "What if it’s already too late?",
+      "What if the right moment I keep waiting for never comes?",
+      "I tell myself I’ll do it tomorrow, next week, when I’m ready — and somehow the days keep slipping by.",
+      "~I just can’t seem to do it."
+    ] },
+    { theme: "year", mode: "verse", kicker: "V · A year later", lines: [
+      "So I made myself a promise:",
+      "even if I can’t send this now, I’ll send it in the future.",
+      "I hope I do.",
+      "And if you’re reading this, then I did.",
+      "~I hope you know that every word came from the heart."
+    ] },
+
     { theme: "tender", kicker: "That’s all of it", title: "I wrote these for you.", big: true, body: "If any of it reached you, you can answer here, in your own words. Whatever you say, I’m glad you read this far.", sign: "Someone who adores you" }
   ];
   document.getElementById("skip").addEventListener("click", function () {
@@ -533,17 +551,18 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
   card.addEventListener("pointerleave", function () { card.style.setProperty("--rx", "0deg"); card.style.setProperty("--ry", "0deg"); });
 
   var cv = document.getElementById("fx"), cx = cv.getContext("2d"), W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2), P = [], mode = "words";
-  var MODES = { wonder: "words", ache: "rain", dawn: "motes", sun: "embers", tender: "hearts" };
-  var WORDS = ["quiet", "echo", "curious", "still", "light", "ink", "words", "moon", "stay", "hum"];
+  var MODES = { wonder: "words", ache: "rain", dawn: "motes", sun: "embers", tender: "hearts", year: "fireflies" };
+  var ELEMENTS = ["H", "C", "N", "O", "He", "Na", "Mg", "Si", "S", "Cl", "K", "Ca", "Fe", "Zn", "Au", "Ne"];
   function size() { W = innerWidth; H = innerHeight; cv.width = W * dpr; cv.height = H * dpr; cx.setTransform(dpr, 0, 0, dpr, 0, 0); }
   function spawn(init) {
     var p = { x: Math.random() * W, y: init ? Math.random() * H : H + 30, s: 6 + Math.random() * 16, v: .25 + Math.random() * .7,
       ph: Math.random() * 6.28, sw: 10 + Math.random() * 24, a: .25 + Math.random() * .45, word: "", heart: false, len: 0, hot: false };
-    if (mode === "words") { if (Math.random() < .3) p.word = WORDS[Math.floor(Math.random() * WORDS.length)]; }
+    if (mode === "words") { var r = Math.random(); if (r < .35) p.word = ELEMENTS[Math.floor(Math.random() * ELEMENTS.length)]; else if (r < .6) { p.mol = true; p.s = 5 + Math.random() * 5; p.rot = Math.random() * 6.28; p.n = 3 + Math.floor(Math.random() * 2); } }
     else if (mode === "rain") { p.y = init ? Math.random() * H : -30; p.len = 12 + Math.random() * 18; p.v = 9 + Math.random() * 8; p.a = .12 + Math.random() * .3; }
     else if (mode === "motes") { p.s = 2 + Math.random() * 3.5; p.v = .2 + Math.random() * .45; p.a = .3 + Math.random() * .5; }
     else if (mode === "embers") { p.s = 1.5 + Math.random() * 3; p.v = .7 + Math.random() * 1.5; p.sw = 8 + Math.random() * 30; p.a = .5 + Math.random() * .5; p.hot = Math.random() < .5; }
     else if (mode === "hearts") { p.heart = Math.random() < .55; }
+    else if (mode === "fireflies") { p.s = 2 + Math.random() * 2.5; p.v = .1 + Math.random() * .3; p.sw = 20 + Math.random() * 40; p.a = .5 + Math.random() * .5; }
     return p;
   }
   function seed() { P = []; var n = mode === "rain" ? (W < 600 ? 55 : 95) : (W < 600 ? 22 : 42); for (var k = 0; k < n; k++) P.push(spawn(true)); }
@@ -554,6 +573,15 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
     cx.bezierCurveTo(x, y + s * 1.0, x + s, y + s * .8, x + s, y + s * .3);
     cx.bezierCurveTo(x + s, y - s * .2, x, y - s * .2, x, y + s * .3);
     cx.closePath();
+  }
+  function mol(x, y, p, t) {
+    var a = p.rot + t / 4000, r = p.s * 2.2, pts = [], k;
+    for (k = 0; k < p.n; k++) pts.push([x + Math.cos(a + k * 6.28 / p.n) * r, y + Math.sin(a + k * 6.28 / p.n) * r]);
+    cx.strokeStyle = "#dfe5ff"; cx.fillStyle = "#dfe5ff"; cx.lineWidth = 1.2; cx.beginPath();
+    pts.forEach(function (q) { cx.moveTo(x, y); cx.lineTo(q[0], q[1]); });
+    cx.stroke();
+    cx.beginPath(); cx.arc(x, y, p.s * .8, 0, 6.28); cx.fill();
+    pts.forEach(function (q) { cx.beginPath(); cx.arc(q[0], q[1], p.s * .5, 0, 6.28); cx.fill(); });
   }
   function tick(t) {
     cx.clearRect(0, 0, W, H);
@@ -570,8 +598,10 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
       p.y -= p.v; x = p.x + Math.sin(t / 1600 + p.ph) * p.sw;
       if (p.y < -40) { P[i] = spawn(false); continue; }
       cx.globalAlpha = p.a * Math.min(1, (H - p.y) / 120);
-      if (mode === "words" && p.word) { cx.font = "italic " + (13 + p.s * .45) + "px Fraunces, Georgia, serif"; cx.fillStyle = "#dfe5ff"; cx.fillText(p.word, x, p.y); }
+      if (mode === "words" && p.mol) { mol(x, p.y, p, t); }
+      else if (mode === "words" && p.word) { cx.font = "italic " + (13 + p.s * .45) + "px Fraunces, Georgia, serif"; cx.fillStyle = "#dfe5ff"; cx.fillText(p.word, x, p.y); }
       else if (mode === "words") { cx.globalAlpha *= .6 + .4 * Math.sin(t / 500 + p.ph); cx.fillStyle = "#f6f1da"; cx.beginPath(); cx.arc(x, p.y, p.s * .14, 0, 6.28); cx.fill(); }
+      else if (mode === "fireflies") { cx.globalAlpha *= .15 + .85 * Math.max(0, Math.sin(t / 600 + p.ph)); cx.fillStyle = "#ffefa8"; cx.shadowBlur = 14; cx.shadowColor = "#ffe27a"; cx.beginPath(); cx.arc(x, p.y, p.s, 0, 6.28); cx.fill(); cx.shadowBlur = 0; }
       else if (mode === "motes") { cx.globalAlpha *= .6 + .4 * Math.sin(t / 700 + p.ph); cx.fillStyle = "#ffe9bf"; cx.beginPath(); cx.arc(x, p.y, p.s, 0, 6.28); cx.fill(); }
       else if (mode === "embers") { cx.globalAlpha *= Math.max(0, Math.min(1, p.y / (H * .8))); cx.fillStyle = p.hot ? "#ff9a3b" : "#ffd27a"; cx.beginPath(); cx.arc(x, p.y, p.s * (.5 + .5 * p.y / H), 0, 6.28); cx.fill(); }
       else if (p.heart) { cx.fillStyle = "#ffe0e6"; heart(x, p.y, p.s * .6); cx.fill(); }
@@ -602,8 +632,7 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
   }
 
   var overlay = document.getElementById("replyOverlay"), msg = document.getElementById("msg"), nm = document.getElementById("nm"),
-      send = document.getElementById("send"), note = document.getElementById("note"), chips = document.getElementById("chips"),
-      form = document.getElementById("replyForm"), done = document.getElementById("replyDone");
+      send = document.getElementById("send"), note = document.getElementById("note"), form = document.getElementById("replyForm"), done = document.getElementById("replyDone");
   var chosen = "", db = null, uid = null, user = null, lastFocus = null;
 
   var ENDPOINT = "https://formspree.io/f/mrpqqbyl";
@@ -619,13 +648,6 @@ label.f { display: block; font-size: 12px; letter-spacing: .14em; text-transform
     document.querySelectorAll(".overlay.open").forEach(function (o) { o.classList.remove("open"); });
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
-  chips.addEventListener("click", function (e) {
-    var b = e.target.closest(".chip"); if (!b) return;
-    var on = b.getAttribute("aria-pressed") === "true";
-    chips.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
-    chosen = on ? "" : b.dataset.v; if (!on) b.setAttribute("aria-pressed", "true");
-    refresh();
-  });
   msg.addEventListener("input", refresh);
   document.getElementById("cancel").addEventListener("click", closeAll);
   document.getElementById("doneClose").addEventListener("click", closeAll);
